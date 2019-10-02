@@ -17,7 +17,6 @@ namespace GroceryStoreExample
         }
         public string Name;
         private decimal _till = 0;
-        public decimal Till { get { return _till; } }
 
     public GroceryStore(string name)
         {
@@ -59,14 +58,14 @@ namespace GroceryStoreExample
             {
                 totalBill += prod.Price;
             }
-            Console.WriteLine($"{Name} says, \"Your bill is: {totalBill}\"");
+            Console.WriteLine($"{Name} says, \"{shopper.Name}, your bill is: {totalBill}\"");
             return totalBill;
         }
 
-        public void ReceivePayment(decimal totalBill)
+        public void ReceivePayment(decimal shopperPayment)
         {
-            _till += totalBill;
-            Console.WriteLine($"{Name}'s till has ${Till}.");
+            _till += shopperPayment;
+            Console.WriteLine($"{Name}'s till has ${_till}.");
         }
     }
 }

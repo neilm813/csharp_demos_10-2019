@@ -7,16 +7,19 @@ namespace GroceryStoreExample
     {
         private List<Shopper> Shoppers = new List<Shopper>();
         private List<Product> _products;
-        // Products can only be get from outside, but not re-assigned
+        // Products can be get from outside, but not re-assigned
         // the .AsReadOnly is needed to also prevent .Add and such
+        // Could also have the prop type be IEnumerable which has no methods
+        // by which to mutate the list on it
         public IList<Product> Products
         {
             get { return _products.AsReadOnly(); }
         }
         public string Name;
-        public decimal Till = 0;
+        private decimal _till = 0;
+        public decimal Till { get { return _till; } }
 
-        public GroceryStore(string name)
+    public GroceryStore(string name)
         {
             Name = name;
             _products = new List<Product>
@@ -62,7 +65,7 @@ namespace GroceryStoreExample
 
         public void ReceivePayment(decimal totalBill)
         {
-            Till += totalBill;
+            _till += totalBill;
             Console.WriteLine($"{Name}'s till has ${Till}.");
         }
     }

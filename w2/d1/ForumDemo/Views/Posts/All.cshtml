@@ -1,0 +1,24 @@
+@model List<Dictionary<string, object>>;
+
+<h1 class="text-center">
+  All Posts
+</h1>
+<h5 class="text-center">
+  <!-- <a asp-controller="Posts" asp-action="New">New Post</a> -->
+  <a href="new">New Post</a>
+</h5>
+
+@foreach (Dictionary<string, object> post in Model)
+{
+<div class="card mx-auto text-center mb-3" style="width: 25rem;">
+    <div class="card-header">
+      <h5 class="card-title">@post["Topic"]</h5>
+    </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">by: @post["Username"]</h6>
+    <p class="card-text">
+      @post["Content"]
+    </p>
+  </div>
+</div>
+}

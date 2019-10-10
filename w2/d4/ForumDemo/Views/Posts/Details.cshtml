@@ -1,0 +1,31 @@
+@model Post
+
+<div class="card mx-auto text-center mb-3" style="width: 25rem;">
+  <div class="card-header">
+    <h5 class="card-title">
+      @Model.Topic
+    </h5>
+  </div>
+<div class="card-body">
+  <h6 class="card-subtitle mb-2 text-muted">by: @Model.Author.FullName()</h6>
+  <p class="card-text">
+    @Model.Content
+  </p>
+</div>
+<div class="card-footer">
+
+    <a asp-controller="Posts" asp-action="All" class="btn btn-info">
+      Back
+    </a>
+
+    @if (ViewBag.Uid == Model.Author.UserId) {
+      <a asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.PostId" class="btn btn-warning">
+        Edit
+      </a>
+      <a asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.PostId" class="btn btn-danger">
+        Delete
+      </a>
+    }
+    <!-- <a href="/posts/delete/@Model.PostId">Delete</a> -->
+</div>
+</div>

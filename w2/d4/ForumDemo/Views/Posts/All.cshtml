@@ -1,0 +1,31 @@
+@model List<Post>;
+
+<h1 class="text-center">
+  All Posts
+</h1>
+<h5 class="text-center">
+  <!-- <a asp-controller="Posts" asp-action="New">New Post</a> -->
+  <a href="new">New Post</a>
+</h5>
+
+@foreach (Post currentPost in Model)
+{
+<div class="card mx-auto text-center mb-3" style="width: 25rem;">
+    <div class="card-header">
+      <h5 class="card-title">
+        <a asp-controller="Posts" asp-action="Details" asp-route-id="@currentPost.PostId">
+          @currentPost.Topic
+        </a>
+        <!-- <a href="/posts/details/@currentPost.PostId">
+          @currentPost.Topic
+        </a> -->
+      </h5>
+    </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">by: @currentPost.Author.FullName()</h6>
+    <p class="card-text">
+      @currentPost.Content
+    </p>
+  </div>
+</div>
+}

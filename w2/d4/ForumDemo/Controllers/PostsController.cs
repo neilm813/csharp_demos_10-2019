@@ -31,7 +31,7 @@ namespace ForumDemo.Controllers
 
             if (uid == null)
             {
-                return RedirectToAction("All", "Home");
+                return RedirectToAction("Index", "Home");
             }
             
             List<Post> allPosts = _db.Posts

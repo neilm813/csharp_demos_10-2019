@@ -1,0 +1,77 @@
+@model List<Post>;
+
+<h1 class="text-center">
+  All Posts
+</h1>
+<h5 class="text-center">
+  <!-- <a asp-controller="Posts" asp-action="New">New Post</a> -->
+  <a href="new">New Post</a>
+</h5>
+
+@foreach (Post currentPost in Model)
+{
+<div class="card mx-auto text-center mb-3" style="width: 25rem;">
+  <div class="card-header">
+    <h5 class="card-title">
+      <a asp-controller="Posts" asp-action="Details" asp-route-id="@currentPost.PostId">
+        @currentPost.Topic
+      </a>
+      <!-- href alternative -->
+      <!-- <a href="/posts/details/@currentPost.PostId">
+        @currentPost.Topic
+      </a> -->
+    </h5>
+  </div>
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">by: @currentPost.Author.FullName()</h6>
+    <p class="card-text">
+      @currentPost.Content
+    </p>
+  </div>
+  <div class="card-footer">
+    @{
+      Vote currentVote = currentPost.Votes.FirstOrDefault(vote => vote.UserId == ViewBag.Uid);
+
+      string upArrowClass = "text-muted";
+      string downArrowClass = "text-muted";
+
+
+      if (currentVote != null)
+      {
+        if (currentVote.IsUpvote)
+        {
+          upArrowClass = "text-success";
+        }
+        else
+        {
+          downArrowClass = "text-danger";
+        }
+      }
+    }
+    <a
+      asp-controller="Posts"
+      asp-action="Vote"
+      asp-route-postId="@currentPost.PostId"
+      asp-route-isUpVote="true"
+      class="h1 @upArrowClass"
+      style="text-decoration: none;"
+      >
+      &uarr;
+    </a>
+    <!-- href alternative -->
+    <!-- <a href="/posts/vote/@currentPost.PostId/true">
+      &uarr;
+    </a> -->
+    <a
+      asp-controller="Posts"
+      asp-action="Vote"
+      asp-route-postId="@currentPost.PostId"
+      asp-route-isUpVote="false"
+      class="h1 @downArrowClass"
+      style="text-decoration: none;"
+      >
+      &darr;
+    </a>
+  </div>
+</div>
+}
